@@ -87,7 +87,7 @@ adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', 'File'
                 $scope.layouts = response.gallery.Layout;
             });
         };
-
+        
         $scope.init = function () {
             $scope.loadImages();
             $scope.loadLayouts();

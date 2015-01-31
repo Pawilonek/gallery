@@ -6,6 +6,19 @@ galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gall
         $scope.galleries = [];
         $scope.gallery = {};
 
+        $scope.newGallery = '';
+        $scope.addGallery = function () {
+            if (!$scope.newGallery) {
+                return false;
+            }
+            var gallery = new Gallery();
+            gallery.name = $scope.newGallery;
+            $scope.newGallery = '';
+            gallery.$save(function () {
+                $scope.loadGalleries();
+            });
+        };
+
         $scope.loadGalleries = function () {
             // Load all
             Gallery.get(function (response) {
@@ -25,7 +38,11 @@ galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gall
             });
         };
 
-
+        $scope.deleteGallery = function (galleryId) {
+            Gallery.delete({galleryId: galleryId}, function (response) {
+                $scope.loadGalleries();
+            });
+        };
 
     }]);
 
