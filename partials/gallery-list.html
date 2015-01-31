@@ -1,0 +1,10 @@
+<div ng-init="loadGalleries()">
+
+    Galerie
+    <ul>
+        <li ng-repeat="g in galleries">
+            <a href="#/galleries/{{g.Gallery.id}}">{{g.Gallery.name}}</a>
+        </li>
+    </ul>
+    
+</div>

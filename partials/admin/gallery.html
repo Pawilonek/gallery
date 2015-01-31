@@ -1,0 +1,19 @@
+<div ng-init="init()">
+    <div class="col-md-7">
+        <h2>{{gallery.name}}</h2>
+        <div class="adminLayout">
+            <div ng-repeat="layout in layouts">
+                {{layout}} <hr/>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h2>Dostępne obrazy</h2>
+        <div class="uploadedImages">
+            <div ng-repeat="image in images" data-id="{{image.File.id}}" >
+                <!-- {{image}} -->
+                <img ng-src="{{image.File.url}}" />
+            </div>
+        </div>
+    </div>
+</div>
