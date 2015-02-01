@@ -15,6 +15,7 @@ h1.center {
     height: 450px;
     */
     position: relative;
+    text-align: center;
 
 }
 
@@ -27,7 +28,7 @@ h1.center {
     max-height: 100%;
     height: auto;
     width: auto;
-    display: inline;
+    margin: auto;
 }
 /*
 #gallery {
@@ -36,15 +37,8 @@ h1.center {
 }
 */
 
-@media screen and (max-width: 360px) {
-    .image {
-        position: initial !important;
-        width: 100% !important;
-        height: auto !important;
-    }
-}
 
-@media screen and (min-width: 360px) {
+@media screen and (min-width: 480px) {
     #gallery {
         -moz-column-count: 2;
         -webkit-column-count: 2;
@@ -52,14 +46,48 @@ h1.center {
     }
 }
 
-
-/* === admin === */
-.uploadedImages {
-    /* overflow: scroll; */
+@media screen and (min-width: 768px) {
+    #gallery {
+        -moz-column-count: 1;
+        -webkit-column-count: 1;
+        column-count: 1;
+        width: 100%;
+        background-color: gold;
+    }
+    .image {
+        position: relative;
+        padding: 0px;
+        width: 200px;
+        height: 200px;
+        float: left;
+        background-color: goldenrod;
+    }
+    .image img {
+        max-width: 100%;
+        max-height: 100%;
+        height: auto;
+        width: auto;
+        margin: auto;
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;        
+    }
 }
 
-.uploadedImages > div {
-    width: 33%;
+@media screen and (min-width: 1024px) {
+    #gallery {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+/* === admin === */
+
+
+.uploadedImages {
+    width: 150px;
     height: 150px;
     float: left;
     background-color: #fff;
@@ -81,7 +109,7 @@ h1.center {
     opacity: 0.5;
 }
 
-.uploadedImages > div:hover img {
+.uploadedImages:hover img {
     opacity: 1;
 }
 
@@ -90,8 +118,11 @@ h1.center {
     height: 500px;
     background-color: gold;
 }
-/*
-.ui-draggable-dragging {
 
+.imageSettings {
+    z-index: 5;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 5px;
 }
-*/

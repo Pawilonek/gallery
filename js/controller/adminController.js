@@ -1,11 +1,12 @@
 var adminController = angular.module('adminController', []);
 
-adminController.controller('adminCtrl', ['$scope', 'FileUploader',
-    function ($scope, FileUploader) {
+adminController.controller('adminCtrl', ['$scope', '$location', 'FileUploader',
+    function ($scope, $location, FileUploader) {
 
         $scope.init = function () {
             if (userHash == null) {
-                // TODO: wywalenie usera
+                $location.path("/");
+                return false;
             }
         }
 
@@ -64,8 +65,8 @@ adminController.controller('adminCtrl', ['$scope', 'FileUploader',
     }]);
 
 // Layouts
-adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', 'File', 'Layout', 'Gallery',
-    function ($scope, $routeParams, File, Layout, Gallery) {
+adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', '$location', 'File', 'Layout', 'Gallery',
+    function ($scope, $routeParams, $location, File, Layout, Gallery) {
 
         $scope.images = [];
         $scope.layouts = [];
@@ -82,13 +83,16 @@ adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', 'File'
 
         $scope.loadLayouts = function () {
             Gallery.get({galleryId: $routeParams.galleryId}, function (response) {
-                console.log(response);
                 $scope.gallery = response.gallery.Gallery;
                 $scope.layouts = response.gallery.Layout;
             });
         };
-        
+
         $scope.init = function () {
+            if (userHash == null) {
+                $location.path("/");
+                return false;
+            }
             $scope.loadImages();
             $scope.loadLayouts();
             $(".adminLayout").droppable({
@@ -119,7 +123,7 @@ adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', 'File'
 
                 // TODO: zrobić to ładniej / kręciołek
                 setTimeout(function () {
-                    $(".uploadedImages > div").draggable({
+                    $(".uploadedImages").draggable({
                         appendTo: "body",
                         helper: "clone"
                     });
@@ -128,6 +132,12 @@ adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', 'File'
             }, function (response) {
                 console.log(response);
                 // TODO: error
+            });
+        };
+        
+        $scope.deleteLayout = function (id) {
+            Layout.delete({layoutId:id}, function(){
+                $scope.loadLayouts();
             });
         };
 

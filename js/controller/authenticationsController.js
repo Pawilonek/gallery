@@ -31,7 +31,7 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$locatio
             $scope.userHash = null;
             userHash = null;
             $location.path("/");
-            localStorage.setItem("userHash", '');
+            localStorage.removeItem("userHash", '');
         }
         
     }]);
