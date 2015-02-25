@@ -1,7 +1,7 @@
 var authenticationsController = angular.module('authenticationsController', []);
 
-authenticationsController.controller('authenticationsCtrl', ['$scope', '$location', 'Authentication',
-    function ($scope, $location, Authentication) {
+authenticationsController.controller('authenticationsCtrl', ['$scope', '$http', '$location', 'Authentication',
+    function ($scope, $http, $location, Authentication) {
         $scope.User = {};
         $scope.userHash = '';
         
@@ -10,6 +10,7 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$locatio
             if (localStorage.getItem("userHash") != null ) {
                 $scope.userHash = localStorage.getItem("userHash");
                 userHash = $scope.userHash;
+                $http.defaults.headers.common.userHash = $scope.userHash;
                 // TODO: sprawdzanie czy sesja nie wygasła
             }
         };
@@ -17,9 +18,9 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$locatio
         $scope.login = function () {
             $scope.User.$save(function (response) {
                 $scope.userHash = response.hash.Authentication.hash;
-                userHash = $scope.userHash;
-                console.log(response);
-                localStorage.setItem("userHash", $scope.userHash);
+                userHash = response.hash.Authentication.hash;
+                localStorage.setItem("userHash", response.hash.Authentication.hash);
+                $http.defaults.headers.common.userHash = response.hash.Authentication.hash;
                 $location.path("/admin");
             }, function (response) {
                 console.log("error");
