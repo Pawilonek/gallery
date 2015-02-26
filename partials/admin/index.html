@@ -4,7 +4,9 @@
         text-align: center;
     }
 
-    .nv-file-over { border: dotted 2px red; }
+    .nv-file-over {
+        border: dotted 2px red;
+    }
 
     #images {
         display: none;
@@ -25,7 +27,10 @@
                     <td>
                         <a href="#/admin/galleries/{{g.Gallery.id}}">{{g.Gallery.name}}</a>
                     </td>
-                    <td>
+                    <td class="actions">
+                        <a href="" title="edytuj" ng-click="editGallery(g.Gallery.id)" >
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
                         <a href="" title="usuń" ng-click="deleteGallery(g.Gallery.id)" >
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>

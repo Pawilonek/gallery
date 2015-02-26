@@ -1,40 +1,73 @@
 var authenticationsController = angular.module('authenticationsController', []);
 
-authenticationsController.controller('authenticationsCtrl', ['$scope', '$http', '$location', 'Authentication',
-    function ($scope, $http, $location, Authentication) {
+authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootScope', '$location', 'Authentication',
+    function ($scope, $rootScope, $location, Authentication) {
         $scope.User = {};
-        $scope.userHash = '';
-        
+
         $scope.init = function () {
             $scope.User = new Authentication();
-            if (localStorage.getItem("userHash") != null ) {
-                $scope.userHash = localStorage.getItem("userHash");
-                userHash = $scope.userHash;
-                $http.defaults.headers.common.userHash = $scope.userHash;
-                // TODO: sprawdzanie czy sesja nie wygasła
+            if (localStorage.getItem("userHash") === null) {
+                return;
             }
+            $rootScope.userHash = localStorage.getItem("userHash");
+            userHash = $rootScope.userHash;
         };
-        
+
         $scope.login = function () {
-            $scope.User.$save(function (response) {
-                $scope.userHash = response.hash.Authentication.hash;
-                userHash = response.hash.Authentication.hash;
+            $scope.User.$save(function (response, headers) {
+                console.log(response)
+                $rootScope.userHash = response.hash.Authentication.hash;
+                userHash = $rootScope.userHash;
                 localStorage.setItem("userHash", response.hash.Authentication.hash);
-                $http.defaults.headers.common.userHash = response.hash.Authentication.hash;
                 $location.path("/admin");
             }, function (response) {
-                console.log("error");
                 console.log(response);
             });
         };
-        
+
         $scope.logout = function () {
-            $scope.userHash = null;
+            $rootScope.userHash = null;
             userHash = null;
+            localStorage.removeItem("userHash");
             $location.path("/");
-            localStorage.removeItem("userHash", '');
-        }
+        };
         
+        $scope.$on('sessionExpired', function(event) {
+            // TODO: message
+            console.log("session expired")
+            $scope.logout();
+        });
     }]);
 
-
+authenticationsController.factory('authenticationInterceptor', ['$rootScope',
+    function ($rootScope) {
+        var interceptor = {
+            request: function (request) {
+                //console.log('request');
+                //console.log(request);
+                request.headers.userHash = $rootScope.userHash;
+                return request;
+            },
+            requestError: function (request) {
+                //console.log('requestError');
+                //console.log(request);
+                return request;
+            },
+            response: function (response) {
+                //console.log('response');
+                //console.log(response);
+                return response;
+            },
+            responseError: function (response) {
+                //console.log('responseError');
+                //console.log(response);
+                if (response.status === 403 && response.data.message === "sessionExpired") {
+                    $rootScope.$broadcast('sessionExpired');
+                }
+                return response;
+            }
+        };
+        return interceptor;
+    }]).config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.interceptors.push('authenticationInterceptor');
+    }]);

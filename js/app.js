@@ -26,34 +26,5 @@ galleryApp.config(['$routeProvider',
                 });
     }]);
 
-
-
-var apiUrl = '/gallery-api/';
+var apiUrl = 'http://localhost/galeria/server/';
 var userHash = null;
-
-function a() {
-    $(".image").draggable({
-        containment: "parent",
-        scroll: false,
-        grid: [100, 100],
-        stop: function (e, ui) {
-            console.log(ui.position);
-        }
-    }).resizable({
-        containment: "#gallery",
-        handles: "all",
-        grid: [100, 100],
-        stop: function (e, ui) {
-            console.log(ui.size);
-        }
-    });
-}
-/*
- $( document ).ready(function() {
- var a = $("#aaa");
- a.append($(window).height()+"x");
- a.append($(window).width()+" ");
- a.append($(document).height()+"x");
- a.append($(document).width());
- });
- */
