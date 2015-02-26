@@ -5,6 +5,7 @@ galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gall
 
         $scope.galleries = [];
         $scope.gallery = {};
+        $scope.editedGalleryId = -1;
 
         $scope.newGallery = '';
         $scope.addGallery = function () {
@@ -43,6 +44,19 @@ galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gall
                 $scope.$emit('alert', {type: 'success', msg: 'Galeria została usunięta.'});
                 $scope.loadGalleries();
             });
+        };
+        
+        $scope.editGallery = function (galleryId) {
+            $scope.editedGalleryId = galleryId;
+        };
+        
+        $scope.saveChanges = function (index) {
+            console.log(index);
+            var gallery = new Gallery();
+            gallery.id = $scope.galleries[index].Gallery.id;
+            gallery.name = $scope.galleries[index].Gallery.name;
+            gallery.$save();    
+            $scope.editedGalleryId = -1;
         };
 
     }]);
