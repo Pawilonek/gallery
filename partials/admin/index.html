@@ -51,14 +51,14 @@
     </form>
 </div>
 
-<div class="col-md-6" uploader="uploader" filters="queueLimit, customFilter">
+<div class="col-md-6" data-uploader="uploader" data-filters="queueLimit, customFilter">
     <div>
         <h3>Dodaj zdjęcia</h3>
-        <div class="well drop-zone" nv-file-drop="" nv-file-over="" uploader="uploader">
+        <div class="well drop-zone" data-nv-file-drop="" data-nv-file-over="" data-uploader="uploader">
             <p>przeciągnij plik tutaj</p>
             <p>lub</p>
             <label for="images" class="btn btn-default" >wybierz plik</label>
-            <input id="images" type="file" nv-file-select="" uploader="uploader" multiple  accept="image/*" />
+            <input id="images" type="file" data-nv-file-select="" data-uploader="uploader" multiple  accept="image/*" />
         </div>
     </div>
     <div>

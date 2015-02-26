@@ -33,8 +33,7 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootSco
         };
         
         $scope.$on('sessionExpired', function(event) {
-            // TODO: message
-            console.log("session expired")
+            $scope.$emit('alert', {type: 'danger', msg: 'Twoja sesja wygasła.'});
             $scope.logout();
         });
     }]);
