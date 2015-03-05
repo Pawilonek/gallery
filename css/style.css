@@ -126,3 +126,9 @@ h1.center {
     right: 0px;
     padding: 5px;
 }
+
+/* bootstrap */
+
+.modal {
+    overflow-y: hidden !important;
+}

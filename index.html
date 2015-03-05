@@ -17,8 +17,8 @@
         <script type="text/javascript" src="lib/angular/angular-resource.min.js"></script>
         <script type="text/javascript" src="lib/angular/angular-file-upload.min.js"></script>
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <!-- UI Bootstrap -->
         <script type="text/javascript" src="lib/ui-bootstrap/ui-bootstrap-tpls.js"></script>
         <script type="text/javascript" src="lib/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
@@ -37,13 +37,8 @@
                 <a href="#/" class="btn btn-default" >
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
-                <a href="#/galleries" class="btn btn-default" >
-                    galerie
-                </a>
-                <button ng-hide="userHash" class="btn btn-default" >
-                    <span class="glyphicon glyphicon-user"></span>
-                    zaloguj
-                </button>
+                <a href="#/galleries" class="btn btn-default" >galerie</a>
+                <button ng-hide="userHash" class="btn btn-default">zaloguj</button>
                 
                 <a ng-show="userHash" class="btn btn-info" role="button" ng-href="#/admin">admin</a>
                 <button ng-show="userHash" class="btn btn-primary" ng-click="logout()">wyloguj</button>
@@ -60,6 +55,31 @@
                 </form>
             </div>
         </nav>
+        
+        <div ng-controller="ModalDemoCtrl">
+            <script type="text/ng-template" id="loginForm.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">zaloguj się</h3>
+                </div>
+                <div class="modal-body" ng-init="init()">
+                    <form class="form-inline" novalidate ng-hide="userHash" >
+                        <div class="form-group">
+                            <input type="text" class="form-control" ng-model="User.username" placeholder="Login" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" ng-model="User.password" placeholder="Hasło" />
+                        </div>
+                        <input type="submit" class="btn btn-default" ng-click="login()" value="zaloguj" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+
+            <button class="btn btn-default" ng-click="open()">nowe logowanie</button>
+        </div>
         
         <div ng-controller="AlertCtrl">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
