@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html lang="pl" ng-app="galleryApp">
+<html lang="pl" data-ng-app="galleryApp">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-        <title> Title </title>
-
-        <link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.11.2/jquery-ui.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <title> Gallery </title>
 
         <!-- jQuery -->
-        <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/bower_components/jQuery/dist/jquery.min.js"></script>
+        <!-- jQuery UI -->
         <script type="text/javascript" src="lib/jquery-ui-1.11.2/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.11.2/jquery-ui.min.css" />
         <!-- AngularJS -->
-        <script type="text/javascript" src="lib/angular/angular.min.js"></script>
-        <script type="text/javascript" src="lib/angular/angular-route.min.js"></script>
-        <script type="text/javascript" src="lib/angular/angular-resource.min.js"></script>
-        <script type="text/javascript" src="lib/angular/angular-file-upload.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular-route/angular-route.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular-resource/angular-resource.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular-file-upload/angular-file-upload.min.js"></script>
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <!-- UI Bootstrap -->
-        <script type="text/javascript" src="lib/ui-bootstrap/ui-bootstrap-tpls.js"></script>
-        <script type="text/javascript" src="lib/ui-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script type="text/javascript" src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <!-- moje -->
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/models/services.js"></script>
@@ -30,62 +28,26 @@
         <script type="text/javascript" src="js/controllers/galleriesController.js"></script>
         <script type="text/javascript" src="js/controllers/adminController.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
     <body>
-        <nav ng-controller="authenticationsCtrl" ng-init="init()">
+        <nav data-ng-controller="authenticationsCtrl" data-ng-init="init()">
             <div class="btn-group" role="group">
-                <a href="#/" class="btn btn-default" >
+                <a data-ng-href="#/" class="btn btn-default" >
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
-                <a href="#/galleries" class="btn btn-default" >galerie</a>
-                <button ng-hide="userHash" class="btn btn-default">zaloguj</button>
-                
-                <a ng-show="userHash" class="btn btn-info" role="button" ng-href="#/admin">admin</a>
-                <button ng-show="userHash" class="btn btn-primary" ng-click="logout()">wyloguj</button>
-            </div>
-            <div>
-                <form class="form-inline" novalidate ng-hide="userHash" >
-                    <div class="form-group">
-                        <input type="text" class="form-control" ng-model="User.username" placeholder="Login" />
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" ng-model="User.password" placeholder="Hasło" />
-                    </div>
-                    <input type="submit" class="btn btn-default" ng-click="login()" value="zaloguj" />
-                </form>
+                <a class="btn btn-default" data-ng-href="#/galleries">galerie</a>
+                <a data-ng-show="userHash" class="btn btn-info" data-ng-href="#/admin">admin</a>
+                <button data-ng-hide="userHash" class="btn btn-default" data-ng-click="openModal()">zaloguj</button>
+                <button data-ng-show="userHash" class="btn btn-primary" data-ng-click="logout()">wyloguj</button>
             </div>
         </nav>
-        
-        <div ng-controller="ModalDemoCtrl">
-            <script type="text/ng-template" id="loginForm.html">
-                <div class="modal-header">
-                    <h3 class="modal-title">zaloguj się</h3>
-                </div>
-                <div class="modal-body" ng-init="init()">
-                    <form class="form-inline" novalidate ng-hide="userHash" >
-                        <div class="form-group">
-                            <input type="text" class="form-control" ng-model="User.username" placeholder="Login" />
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" ng-model="User.password" placeholder="Hasło" />
-                        </div>
-                        <input type="submit" class="btn btn-default" ng-click="login()" value="zaloguj" />
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" ng-click="ok()">OK</button>
-                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                </div>
-            </script>
 
-            <button class="btn btn-default" ng-click="open()">nowe logowanie</button>
-        </div>
-        
-        <div ng-controller="AlertCtrl">
+        <div data-ng-controller="AlertCtrl">
             <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
 
-        <div ng-view> </div>
+        <div data-ng-view> </div>
 
     </body>
 </html>

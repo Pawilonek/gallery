@@ -1,7 +1,7 @@
 var authenticationsController = angular.module('authenticationsController', []);
 
-authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootScope', '$location', 'Authentication',
-    function ($scope, $rootScope, $location, Authentication) {
+authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootScope', '$location', 'Authentication', '$modal',
+    function ($scope, $rootScope, $location, Authentication, $modal) {
         $scope.User = {};
 
         $scope.init = function () {
@@ -14,14 +14,16 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootSco
         };
 
         $scope.login = function () {
-            $scope.User.$save(function (response, headers) {
-                console.log(response)
+            $scope.User.$save(function (response) {
+                console.log(response);
+                if (!response.hash) {
+                    console.log(response.message);
+                    return false;
+                }
                 $rootScope.userHash = response.hash.Authentication.hash;
                 userHash = $rootScope.userHash;
                 localStorage.setItem("userHash", response.hash.Authentication.hash);
                 $location.path("/admin");
-            }, function (response) {
-                console.log(response);
             });
         };
 
@@ -31,16 +33,34 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootSco
             localStorage.removeItem("userHash");
             $location.path("/");
         };
-        
-        $scope.$on('sessionExpired', function(event) {
+
+        $scope.$on('sessionExpired', function () {
             $scope.$emit('alert', {type: 'danger', msg: 'Twoja sesja wygasła.'});
             $scope.logout();
         });
+
+        $scope.openModal = function () {
+            var modalInstance = $modal.open({
+                templateUrl: 'partials/modals/loginForm.html',
+                controller: 'authenticationsCtrl',
+                resolve: {
+                    items: function () {
+                        //return $scope.items;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                // $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
     }]);
 
 authenticationsController.factory('authenticationInterceptor', ['$rootScope',
     function ($rootScope) {
-        var interceptor = {
+        return {
             request: function (request) {
                 //console.log('request');
                 //console.log(request);
@@ -66,7 +86,6 @@ authenticationsController.factory('authenticationInterceptor', ['$rootScope',
                 return response;
             }
         };
-        return interceptor;
     }]).config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.interceptors.push('authenticationInterceptor');
-    }]);
+    $httpProvider.interceptors.push('authenticationInterceptor');
+}]);
