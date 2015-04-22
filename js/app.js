@@ -80,3 +80,14 @@ angular.module('galleryApp').controller('ModalInstanceCtrl', function ($scope, $
     };
 });
 */
+
+galleryApp.directive('fillWithImage', function(){
+    return function(scope, element, attrs){
+        var url = attrs.fillWithImage;
+        url = url.replace(/\\/g, "/");
+        element.css({
+            'background-image': 'url(' + url +')',
+            'background-size' : 'cover'
+        });
+    };
+});

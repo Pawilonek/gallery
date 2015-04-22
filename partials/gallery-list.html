@@ -1,10 +1,9 @@
-<div ng-init="loadGalleries()">
-
-    Galerie
-    <ul>
-        <li ng-repeat="g in galleries">
-            <a href="#/galleries/{{g.Gallery.id}}">{{g.Gallery.name}}</a>
-        </li>
-    </ul>
-
+<div class="galleryList" data-ng-init="loadGalleries()">
+    <div class="singleGallery" data-ng-repeat="g in galleries">
+        <a data-ng-href="/#/galleries/{{g.Gallery.id}}">
+            <div class="galleryImage" data-fill-with-image="{{g.Layout[0].File.url}}"></div>
+            <div class="galleryHover"></div>
+            <div class="galleryName" data-ng-bind="g.Gallery.name"></div>
+        </a>
+    </div>
 </div>
