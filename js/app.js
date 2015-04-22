@@ -28,7 +28,15 @@ galleryApp.config(['$routeProvider',
                 });
     }]);
 
-var apiUrl = 'http://localhost/galeria/server/';
+/*
+galleryApp.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}
+]);
+*/
+
+var apiUrl = 'http://api.gallery.local/';
 var userHash = null;
 
 
@@ -50,24 +58,7 @@ angular.module('galleryApp').controller('AlertCtrl', ['$scope', '$rootScope', fu
 
 angular.module('galleryApp').controller('ModalDemoCtrl', function ($scope, $modal, $log) {
 
-  $scope.open = function () {
 
-    var modalInstance = $modal.open({
-      templateUrl: 'loginForm.html',
-      controller: 'authenticationsCtrl',
-      resolve: {
-        items: function () {
-          //return $scope.items;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
-    });
-  };
 });
 
 // Please note that $modalInstance represents a modal window (instance) dependency.
