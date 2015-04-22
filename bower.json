@@ -13,6 +13,7 @@
     "angular-route": "1.2.*",
     "angular-file-upload": "1.1.*",
     "bootstrap": "3.3.*",
-    "angular-bootstrap": "0.12.*"
+    "angular-bootstrap": "0.12.*",
+    "font-awesome": "~4.3.0"
   }
 }
