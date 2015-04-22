@@ -14,10 +14,13 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootSco
         };
 
         $scope.login = function () {
+            if (!$scope.User.username || !$scope.User.password) {
+                $scope.errorMessage = "Podaj login i hasło!";
+                return false;
+            }
             $scope.User.$save(function (response) {
-                console.log(response);
                 if (!response.hash) {
-                    console.log(response.message);
+                    $scope.errorMessage = response.message;
                     return false;
                 }
                 $rootScope.userHash = response.hash.Authentication.hash;
@@ -40,21 +43,17 @@ authenticationsController.controller('authenticationsCtrl', ['$scope', '$rootSco
         });
 
         $scope.openModal = function () {
-            var modalInstance = $modal.open({
+            $modal.open({
                 templateUrl: 'partials/modals/loginForm.html',
-                controller: 'authenticationsCtrl',
-                resolve: {
-                    items: function () {
-                        //return $scope.items;
-                    }
-                }
+                controller: 'authenticationsCtrl'
             });
-
-            modalInstance.result.then(function (selectedItem) {
+/*
+            $scope.modalInstance.result.then(function (selectedItem) {
                 $scope.selected = selectedItem;
             }, function () {
                 // $log.info('Modal dismissed at: ' + new Date());
             });
+            */
         };
     }]);
 

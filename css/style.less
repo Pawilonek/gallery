@@ -122,10 +122,10 @@ h1.center {
 .galleryList {
     text-align: center;
     .singleGallery {
-        margin: 20px;
-        width: 300px;
+        margin: 10px;
+        width: 330px;
         height: 250px;
-        float: left;
+        display: inline-block;
         overflow: hidden;
         position: relative;
         border: solid #000 5px;
@@ -133,14 +133,15 @@ h1.center {
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 0;
-            top: 0;
-            background-color: #000000;
-            opacity: 0.0;
-            transition: opacity 1s ease;
+            top: 180px;
+            bottom: 15px;
+            height: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: all 0.2s ease;
         }
         &:hover .galleryHover {
-            opacity: 0.5;
+            top: 0;
+            bottom: 0;
         }
         .galleryImage {
             position: absolute;
@@ -151,22 +152,26 @@ h1.center {
             overflow: hidden;
             background-position: center;
             zoom: 1;
-            transition: all 2s ease;
+            transition: all 2s ease-out;
+
         }
         &:hover .galleryImage {
-            transform: scale(1.1);
+            transform: scale(1.2);
         }
         .galleryName {
-            position: absolute;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            margin: auto;
-            color: #ffffff;
+            color: rgb(255, 255, 255);
             font-size: 25px;
-            border-bottom: solid #ffffff 1px;
             font-family: 'Kalam', cursive;
             font-weight: bold;
+            transition: all 0.2s ease;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 5px;
+        }
+        &:hover .galleryName {
+            bottom: 5px;
         }
 
     }

@@ -2,8 +2,9 @@
     <div class="singleGallery" data-ng-repeat="g in galleries">
         <a data-ng-href="/#/galleries/{{g.Gallery.id}}">
             <div class="galleryImage" data-fill-with-image="{{g.Layout[0].File.url}}"></div>
-            <div class="galleryHover"></div>
-            <div class="galleryName" data-ng-bind="g.Gallery.name"></div>
+            <div class="galleryHover">
+                <div class="galleryName" data-ng-bind="g.Gallery.name"></div>
+            </div>
         </a>
     </div>
 </div>
