@@ -1,14 +1,19 @@
 var galleriesController = angular.module('galleriesController', []);
 
-galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gallery',
-    function ($scope, $routeParams, Gallery) {
+galleriesController.controller('galleriesCtrl',
+    function ($scope, $routeParams, $sce, Gallery) {
 
         $scope.galleries = [];
         $scope.gallery = {};
         $scope.editedGalleryId = -1;
 
+        $scope.defaultButtonValue = $sce.trustAsHtml('dodaj');
+        $scope.spinner = $sce.trustAsHtml('<i class="fa fa-spin fa-spinner"></i>');
+        $scope.buttonValue = $scope.defaultButtonValue;
+
         $scope.newGallery = '';
         $scope.addGallery = function () {
+            $scope.buttonValue = $scope.spinner;
             if (!$scope.newGallery) {
                 return false;
             }
@@ -16,7 +21,10 @@ galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gall
             gallery.name = $scope.newGallery;
             $scope.newGallery = '';
             gallery.$save(function () {
+                $scope.buttonValue = $scope.defaultButtonValue;
                 $scope.loadGalleries();
+            }, function () {
+                $scope.buttonValue = $scope.defaultButtonValue;
             });
         };
 
@@ -45,20 +53,18 @@ galleriesController.controller('galleriesCtrl', ['$scope', '$routeParams', 'Gall
                 $scope.loadGalleries();
             });
         };
-        
+
         $scope.editGallery = function (galleryId) {
             $scope.editedGalleryId = galleryId;
         };
-        
+
         $scope.saveChanges = function (index) {
             console.log(index);
             var gallery = new Gallery();
             gallery.id = $scope.galleries[index].Gallery.id;
             gallery.name = $scope.galleries[index].Gallery.name;
-            gallery.$save();    
+            gallery.$save();
             $scope.editedGalleryId = -1;
         };
 
-    }]);
-
-
+    });

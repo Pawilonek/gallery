@@ -1,14 +1,14 @@
 var adminController = angular.module('adminController', []);
 
-adminController.controller('adminCtrl', ['$scope', '$location', 'FileUploader',
-    function ($scope, $location, FileUploader) {
+adminController.controller('adminCtrl', ['$scope', "$rootScope", '$location', 'FileUploader',
+    function ($scope, $rootScope, $location, FileUploader) {
 
         $scope.init = function () {
-            if (userHash == null) {
+            if ($rootScope.authToken == null) {
                 $location.path("/");
                 return false;
             }
-        }
+        };
 
         var uploader = $scope.uploader = new FileUploader({
             url: apiUrl + 'files.json',

@@ -1,5 +1,5 @@
-var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', /*'layoutsController',*/ 'layoutsService', 'authenticationsController', 'authenticationsService',
-    'galleriesController', 'galleriesService', 'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap']);
+var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStorage', /*'layoutsController',*/ 'layoutsService', 'authController',
+    'galleriesController', 'galleriesService', 'authModalController' ,'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap']);
 
 galleryApp.config(['$routeProvider',
     function ($routeProvider) {
@@ -35,6 +35,21 @@ galleryApp.config(['$httpProvider', function($httpProvider) {
 }
 ]);
 */
+
+galleryApp.directive('focusMe', function ($timeout) {
+    return {
+        link: function (scope, element, attr) {
+            attr.$observe('focusMe', function (value) {
+                if (value === "true") {
+                    $timeout(function () {
+                        element[0].focus();
+                    });
+                }
+            });
+        }
+    };
+});
+
 
 var apiUrl = 'http://api.gallery.local/';
 var userHash = null;

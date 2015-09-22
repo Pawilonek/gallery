@@ -1,0 +1,27 @@
+<form novalidate data-ng-submit="login()" id="loginForm">
+    <div class="modal-header">
+        <h3 class="modal-title">zaloguj się</h3>
+    </div>
+    <div class="modal-body" data-ng-init="init()">
+        <div class="form-group">
+            <input type="text" id="login" class="form-control" data-ng-model="User.username" placeholder="login" data-focus-me="true" />
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" data-ng-model="User.password" placeholder="hasło"/>
+        </div>
+        <div class="text-danger" data-ng-bind="errorMessage"></div>
+    </div>
+    <div class="modal-footer">
+        <button
+            type="submit" form="loginForm"
+            class="btn btn-success"
+            data-ng-disabled="buttonValue != defaultButtonValue"
+            data-ng-bind-html="buttonValue">
+        </button>
+        <button
+            class="btn btn-default"
+            data-ng-click="dismissModal()">
+            anuluj
+        </button>
+    </div>
+</form>
