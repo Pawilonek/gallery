@@ -24,7 +24,7 @@ galleryApp.config(['$routeProvider',
                     controller: 'adminGalleryCtrl'
                 }).
                 otherwise({
-                    redirectTo: '/galleries'
+                    redirectTo: '/'
                 });
     }]);
 
