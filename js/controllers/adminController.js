@@ -11,7 +11,7 @@ adminController.controller('adminCtrl', ['$scope', "$rootScope", '$location', 'F
         };
 
         var uploader = $scope.uploader = new FileUploader({
-            url: apiUrl + 'files.json',
+            url: apiUrl + 'images.json',
             method: 'POST'
         });
 
@@ -82,17 +82,19 @@ adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', '$loca
         };
 
         $scope.loadLayouts = function () {
-            Gallery.get({galleryId: $routeParams.galleryId}, function (response) {
-                $scope.gallery = response.gallery.Gallery;
-                $scope.layouts = response.gallery.Layout;
+            Gallery.get({id: $routeParams.galleryId}, function (response) {
+                $scope.gallery = response.gallery;
+                $scope.layouts = response.gallery.layouts;
             });
         };
 
         $scope.init = function () {
+            /*
             if (userHash == null) {
                 $location.path("/");
                 return false;
             }
+            */
             $scope.loadImages();
             $scope.loadLayouts();
             $(".adminLayout").droppable({
@@ -119,7 +121,7 @@ adminController.controller('adminGalleryCtrl', ['$scope', '$routeParams', '$loca
 
         $scope.loadImages = function () {
             File.get(function (response) {
-                $scope.images = response.files;
+                $scope.images = response.images;
 
                 // TODO: zrobić to ładniej / kręciołek
                 setTimeout(function () {

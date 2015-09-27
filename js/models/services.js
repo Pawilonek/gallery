@@ -6,26 +6,27 @@ layoutsService.factory('Layout', ['$resource',
         });
     }]);
 
-var authenticationsService = angular.module('authenticationsService', ['ngResource']);
-authenticationsService.factory('Authentication', ['$resource',
-    function ($resource) {
-        return $resource(apiUrl + 'authentications/:hashId.json', {hashId: ''}, {
-            'update': { method:'PUT' }
-        });
-    }]);
-
 var galleriesService = angular.module('galleriesService', ['ngResource']);
 galleriesService.factory('Gallery', ['$resource',
     function ($resource) {
-        return $resource(apiUrl + 'galleries/:galleryId.json', {galleryId: ''}, {
+        var galleries = $resource(apiUrl + 'galleries/:id.json', {id: '@id' }, {
             'update': { method:'PUT' }
         });
+
+        galleries.prototype.save = function() {
+            if (this.id) {
+                return this.$update();
+            } else {
+                return this.$save();
+            }
+        };
+        return galleries;
     }]);
 
 var filesService = angular.module('filesService', ['ngResource']);
 filesService.factory('File', ['$resource',
     function ($resource) {
-        return $resource(apiUrl + 'files/:fileId.json', {fileId: ''}, {
+        return $resource(apiUrl + 'images/:fileId.json', {fileId: ''}, {
             'update': { method:'PUT' }
         });
     }]);

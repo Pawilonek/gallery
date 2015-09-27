@@ -1,12 +1,12 @@
-<div ng-init="init()">
+<div data-ng-init="init()">
     <div class="col-md-7">
         <h2>{{gallery.name}}</h2>
         <div class="adminLayout">
-            <div ng-repeat="layout in layouts">
+            <div data-ng-repeat="layout in layouts">
                 <div class="image">
-                    <img ng-src="{{layout.File.url}}" alt="" />
+                    <img data-ng-src="{{layout.image.absolute_url}}" alt="" />
                     <div class="imageSettings">
-                        <button class="btn btn-danger" ng-click="deleteLayout(layout.id)">
+                        <button class="btn btn-danger" data-ng-click="deleteLayout(layout.id)">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
                     </div>
@@ -17,9 +17,9 @@
     <div class="col-md-5">
         <h2>Dostępne obrazy</h2>
         <div>
-            <div class="uploadedImages" ng-repeat="image in images" data-id="{{image.File.id}}" >
+            <div class="uploadedImages" data-ng-repeat="image in images" data-id="{{image.id}}" >
                 <!-- {{image}} -->
-                <img ng-src="{{image.File.url}}" />
+                <img data-ng-src="{{image.absolute_url}}" />
             </div>
         </div>
     </div>

@@ -61,9 +61,9 @@ galleriesController.controller('galleriesCtrl',
         $scope.saveChanges = function (index) {
             console.log(index);
             var gallery = new Gallery();
-            gallery.id = $scope.galleries[index].Gallery.id;
-            gallery.name = $scope.galleries[index].Gallery.name;
-            gallery.$save();
+            gallery.id = $scope.galleries[index].id;
+            gallery.name = $scope.galleries[index].name;
+            gallery.save();
             $scope.editedGalleryId = -1;
         };
 

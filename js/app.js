@@ -11,7 +11,7 @@ galleryApp.config(['$routeProvider',
                     templateUrl: 'partials/gallery-list.html',
                     controller: 'galleriesCtrl'
                 }).
-                when('/galleries/:galleryId', {
+                when('/galleries/:galleryId/:gallerySlug', {
                     templateUrl: 'partials/gallery.html',
                     controller: 'galleriesCtrl'
                 }).
