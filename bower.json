@@ -15,6 +15,8 @@
     "bootstrap": "3.3.*",
     "angular-bootstrap": "0.13.*",
     "font-awesome": "4.*",
-    "ngstorage": "0.3.*"
+    "ngstorage": "0.3.*",
+    "angular-ckeditor": "~1.0.0",
+    "ckeditor": "~4.5.3"
   }
 }

@@ -14,6 +14,14 @@ authController.controller('authenticationsCtrl', function ($scope, $rootScope, $
             $location.path("/");
         };
 
+        $rootScope.isAdmin = function () {
+            if ($rootScope.authToken) {
+                return true;
+            } else {
+                return false;
+            }
+        };
+
         /*
         $scope.$on('sessionExpired', function () {
             $scope.$emit('alert', {type: 'danger', msg: 'Twoja sesja wygasła.'});

@@ -1,11 +1,13 @@
 var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStorage', /*'layoutsController',*/ 'layoutsService', 'authController',
-    'galleriesController', 'galleriesService', 'authModalController' ,'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap']);
+    'galleriesController', 'galleriesService', 'authModalController' ,'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap',
+    'ckeditor', 'pagesController', 'pagesService']);
 
 galleryApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
-                when('/', {
-                    templateUrl: 'partials/home.html'
+                when('/page/:pageId/:pageSlug', {
+                    templateUrl: 'partials/pages.html',
+                    controller: 'pagesCtrl'
                 }).
                 when('/galleries', {
                     templateUrl: 'partials/gallery-list.html',
@@ -24,7 +26,7 @@ galleryApp.config(['$routeProvider',
                     controller: 'adminGalleryCtrl'
                 }).
                 otherwise({
-                    redirectTo: '/'
+                    redirectTo: '/page/1/home'
                 });
     }]);
 

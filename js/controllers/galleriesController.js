@@ -39,7 +39,7 @@ galleriesController.controller('galleriesCtrl',
         };
 
         $scope.loadGallery = function () {
-            Gallery.get({galleryId: $routeParams.galleryId}, function (response) {
+            Gallery.get({id: $routeParams.galleryId}, function (response) {
                 $scope.gallery = response.gallery;
             }, function (response) {
                 // TODO: error
@@ -48,7 +48,7 @@ galleriesController.controller('galleriesCtrl',
         };
 
         $scope.deleteGallery = function (galleryId) {
-            Gallery.delete({galleryId: galleryId}, function (response) {
+            Gallery.delete({id: galleryId}, function (response) {
                 $scope.$emit('alert', {type: 'success', msg: 'Galeria została usunięta.'});
                 $scope.loadGalleries();
             });

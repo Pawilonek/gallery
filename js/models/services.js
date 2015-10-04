@@ -12,7 +12,6 @@ galleriesService.factory('Gallery', ['$resource',
         var galleries = $resource(apiUrl + 'galleries/:id.json', {id: '@id' }, {
             'update': { method:'PUT' }
         });
-
         galleries.prototype.save = function() {
             if (this.id) {
                 return this.$update();
@@ -21,6 +20,22 @@ galleriesService.factory('Gallery', ['$resource',
             }
         };
         return galleries;
+    }]);
+
+var pagesService = angular.module('pagesService', ['ngResource']);
+pagesService.factory('Page', ['$resource',
+    function ($resource) {
+        var pages = $resource(apiUrl + 'pages/:id.json', {id: '@id' }, {
+            'update': { method:'PUT' }
+        });
+        pages.prototype.save = function() {
+            if (this.id) {
+                return this.$update();
+            } else {
+                return this.$save();
+            }
+        };
+        return pages;
     }]);
 
 var filesService = angular.module('filesService', ['ngResource']);
