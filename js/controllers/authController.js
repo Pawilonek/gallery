@@ -1,106 +1,86 @@
 var authController = angular.module('authController', []);
-authController.controller('authenticationsCtrl', function ($scope, $rootScope, $location, $modal) {
+authController.controller('authenticationsCtrl', function ($scope, $rootScope, $location, $modal, $route) {
 
-        $scope.init = function () {
-            if (localStorage.getItem("authToken") === null) {
-                return;
-            }
-            $rootScope.authToken = localStorage.getItem("authToken");
-        };
+    const ROLE_USER = "user";
+    const ROLE_ADMIN = "admin";
 
-        $scope.logout = function () {
-            $rootScope.authToken = null;
-            localStorage.removeItem("authToken");
-            $location.path("/");
-        };
+    $scope.user = {};
 
-        $rootScope.isAdmin = function () {
-            if ($rootScope.authToken) {
-                return true;
-            } else {
-                return false;
-            }
-        };
+    $scope.init = function () {
+        if (localStorage.getItem("authToken") === null) {
+            return;
+        }
+        $rootScope.authToken = localStorage.getItem("authToken");
 
-        /*
-        $scope.$on('sessionExpired', function () {
-            $scope.$emit('alert', {type: 'danger', msg: 'Twoja sesja wygasła.'});
-            $scope.logout();
+        $scope.user = jwt_decode($rootScope.authToken);
+    };
+
+    $scope.logout = function () {
+        $rootScope.authToken = null;
+        $scope.user = {};
+        localStorage.removeItem("authToken");
+        $route.reload();
+    };
+
+    $rootScope.isAdmin = function () {
+        if (!$scope.user) {
+            return false;
+        }
+
+        return $scope.user.role === ROLE_ADMIN;
+    };
+
+    /*
+     $scope.$on('sessionExpired', function () {
+         $scope.$emit('alert', {type: 'danger', msg: 'Twoja sesja wygasła.'});
+         $scope.logout();
+     });
+     */
+
+    $scope.openModal = function () {
+        // generuj nowy 'modal'
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'partials/modals/loginModal.html',
+            controller: 'authModalCtrl'
         });
-        */
-
-        $scope.openModal = function () {
-            // generate modal
-            var modalInstance = $modal.open({
-                animation: true,
-                templateUrl: 'partials/modals/loginModal.html',
-                controller: 'authModalCtrl'
-            });
-            // modal result
-            modalInstance.result.
-                then(function () {
-                    // user logged in
-                    $location.path("/admin");
-                }, function () {
-                    // modal dismissed
-                });
-        };
-    });
+        // modal result
+        modalInstance.result.then(function () {
+            // użytkownik został zalogowany
+            // odczytaj dane z otrzymanego tokena
+            $scope.user = jwt_decode($rootScope.authToken);
+            // przeładuj stronę
+            $route.reload();
+        });
+    };
+});
 
 authController.factory('authenticationInterceptor', function ($rootScope, $q) {
-        return {
-            'request': function (config) {
-                config.headers = config.headers || {};
-                if ($rootScope.authToken) {
-                    config.headers.Authorization = $rootScope.authToken;
-                }
-                return config;
-            },
-            'responseError': function (response) {
-                /*
-                if (response.status === 401 || response.status === 403) {
-                    $location.path('/signin');
-                }
-                */
-                return $q.reject(response);
+    return {
+        'request': function (config) {
+            config.headers = config.headers || {};
+            if ($rootScope.authToken) {
+                config.headers.Authorization = $rootScope.authToken;
             }
+            return config;
+        },
+        'responseError': function (response) {
             /*
-            request: function (request) {
-                //console.log('request');
-                //console.log(request);
-                request.headers.Authorization = $rootScope.authToken;
-                return request;
-            }
-
-            requestError: function (request) {
-                //console.log('requestError');
-                //console.log(request);
-                return request;
-            },
-            response: function (response) {
-                //console.log('response');
-                //console.log(response);
-                return response;
-            },
-            responseError: function (response) {
-                //console.log('responseError');
-                //console.log(response);
-                if (response.status === 403 && response.data.message === "sessionExpired") {
-                    $rootScope.$broadcast('sessionExpired');
-                }
-                return response;
-
-            }
-            */
-        };
-    }).config(['$httpProvider', function ($httpProvider) {
+             if (response.status === 401 || response.status === 403) {
+                 $location.path('/signin');
+             }
+             */
+            return $q.reject(response);
+        }
+    };
+}).config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('authenticationInterceptor');
 }]);
 
 var authModalController = angular.module('authModalController', []);
 authModalController.controller('authModalCtrl', function ($scope, $modalInstance, $http, $rootScope, $sce) {
 
-    $scope.errorMessage  = '';
+    $scope.errorMessage = '';
     $scope.defaultButtonValue = $sce.trustAsHtml('zaloguj');
     $scope.spinner = $sce.trustAsHtml('<i class="fa fa-spin fa-spinner"></i>');
     $scope.buttonValue = $scope.defaultButtonValue;
@@ -123,12 +103,12 @@ authModalController.controller('authModalCtrl', function ($scope, $modalInstance
         };
 
         $http.post(apiUrl + 'users/login', data).
-            then(function(response) {
+            then(function (response) {
                 $scope.buttonValue = $scope.defaultButtonValue;
                 $rootScope.authToken = response.data.token;
                 localStorage.setItem("authToken", $rootScope.authToken);
                 $modalInstance.close("loggedIn");
-            }, function(response) {
+            }, function (response) {
                 $scope.buttonValue = $scope.defaultButtonValue;
                 console.log("error");
                 console.log(response);
