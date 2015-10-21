@@ -12,7 +12,10 @@ adminController.controller('adminCtrl', ['$scope', "$rootScope", '$location', 'F
 
         var uploader = $scope.uploader = new FileUploader({
             url: apiUrl + 'images.json',
-            method: 'POST'
+            method: 'POST',
+            headers: {
+                Authorization: $rootScope.authToken
+            }
         });
 
         // FILTERS
