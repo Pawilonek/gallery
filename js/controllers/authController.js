@@ -4,7 +4,7 @@ authController.controller('authenticationsCtrl', function ($scope, $rootScope, $
     const ROLE_USER = "user";
     const ROLE_ADMIN = "admin";
 
-    $scope.user = {};
+    $scope.user = null;
 
     $scope.init = function () {
         if (localStorage.getItem("authToken") === null) {
@@ -17,9 +17,13 @@ authController.controller('authenticationsCtrl', function ($scope, $rootScope, $
 
     $scope.logout = function () {
         $rootScope.authToken = null;
-        $scope.user = {};
+        $scope.user = null;
         localStorage.removeItem("authToken");
         $route.reload();
+    };
+
+    $rootScope.isLoggedIn = function () {
+        return ($scope.user != null);
     };
 
     $rootScope.isAdmin = function () {

@@ -1,28 +1,36 @@
 <header>
     <div class="container">
-        <div class="row topMenu">
-            <a data-ng-href="/#/">
-                <div id="logo">
-                    Art Gallery
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a data-ng-href="/#/" class="navbar-brand">Art Gallery</a>
                 </div>
-            </a>
-            <nav data-ng-controller="authenticationsCtrl" data-ng-init="init()">
-                <div class="btn-group" role="group" data-ng-hide="authToken">
-                    <a data-ng-href="/#/" class="btn"><i class="fa fa-home"></i></a>
-                    <a data-ng-href="/#/galleries" class="btn">galerie</a>
-                    <a class="btn" data-ng-click="openModal()">zaloguj</a>
+                <div id="menu" class="collapse navbar-collapse" data-ng-controller="authenticationsCtrl"
+                     data-ng-init="init()">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a data-ng-href="/#/" class="btn"><i class="fa fa-home"></i></a></li>
+                        <li><a data-ng-href="/#/galleries" class="btn">galerie</a></li>
+                        <li><a data-ng-href="/#/admin" class="btn" data-ng-show="isAdmin()">admin</a></li>
+                        <li><a data-ng-click="openModal()" class="btn" data-ng-hide="isLoggedIn()">zaloguj</a></li>
+                        <li><a data-ng-click="logout()" class="btn" data-ng-show="isLoggedIn()">wyloguj</a></li>
+                    </ul>
                 </div>
-                <div class="btn-group" role="group" data-ng-show="authToken">
-                    <a data-ng-href="/#/admin" class="btn">admin</a>
-                    <a class="btn" data-ng-click="logout()">wyloguj</a>
-                </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
 
         <div class="row" id="homepageText">
-            <h1><strong>KAMIŃSKI</strong> Paweł</h1>
+            <h1>
+                <strong>KAMIŃSKI</strong>
+                Paweł
+            </h1>
+
             <h3>Najlepsze strony w mieście!</h3>
         </div>
     </div>
-
 </header>

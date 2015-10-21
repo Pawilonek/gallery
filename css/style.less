@@ -1,3 +1,5 @@
+@screen-sm-max: 767px;
+@screen-md: 768px;
 
 #gallery {
     background-color: #fff;
@@ -113,46 +115,50 @@
  */
 
 body {
-    background-color: rgb(32, 36, 42);
+    background-color: rgb(25, 29, 25);
 }
 
 .container {
     padding: 0;
 }
+#wrapper {
+    background-color: rgb(32, 36, 42);
+}
 
 header {
-    background: url('../img/header-bg.png') top center;
-    padding: 50px 0;
-    .topMenu {
-        margin: auto;
-        border-radius: 10px;
+    @media (min-width: @screen-md) {
+        background: url('../img/header-bg.png') top center;
+        padding: 50px 0;
+    }
+    .navbar {
+        @media (min-width: @screen-md) {
+            border-radius: 10px;
+        }
         background-color: rgba(44, 47, 52, 0.9);
         color: rgb(151, 151, 151);
         padding: 20px 30px;
-
-        #logo {
-            float: left;
+        a {
+            color: rgb(150, 150, 150);
+            font-weight: bold;
+            transition: all 0.2s;
+            &:hover {
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+            &:visited {
+                text-decoration: none;
+            }
+        }
+        .navbar-brand {
             color: rgb(188, 234, 22);
             font-size: 40px;
             font-family: 'Italianno', cursive;
-            //transform: rotate(-10deg);
+            transform: rotate(-5deg);
             text-shadow: 2px 2px 12px rgba(255, 255, 255, 0.3);
-        }
-        nav {
-            float: right;
-            overflow: auto;
-            a.btn {
-                color: rgb(150, 150, 150);
-                font-weight: bold;
-                transition: all 0.2s;
-                &:hover {
-                    color: rgb(255, 255, 255);
-                    border-top: solid rgb(188, 234, 22) 3px;
-                    text-decoration: none;
-                }
-                &:visited {
-                    text-decoration: none;
-                }
+            transition: all 0.3s;
+            &:hover {
+                color: rgb(210, 230, 150);
+                transform: rotate(-8deg);
             }
         }
     }
@@ -168,42 +174,50 @@ header {
 }
 
 footer {
-    margin-top: 50px;
+    //margin-top: 50px;
+
+    overflow: hidden;
     background-color: rgb(25, 29, 25);
-    color: rgb(150, 150, 150);
+    color: rgb(120, 120, 120);
     padding: 20px;
     a {
-        color: rgb(255, 255, 255);
+        color: rgb(120, 120, 120);
         text-decoration: underline;
+        transition: color 0.2s;
         &:hover {
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-        }
-    }
-    span {
-        margin: 0 10px;
-        a {
-            color: rgb(120, 120, 120);
-            transition: color 0.2s;
-            &:hover {
-                color: rgb(255, 255, 255);
-            }
+            color: rgb(190, 190, 190);
         }
     }
     .left {
-        float: left;
+        @media (max-width: @screen-sm-max) {
+            text-align: center;
+        }
     }
     .right {
-        float: right;
+        text-align: right;
+        @media (max-width: @screen-sm-max) {
+            text-align: center;
+        }
+    }
+    span.icon {
+        margin: 0 10px;
+        a {
+            text-decoration: none;
+            &:hover {
+                text-decoration: none;
+            }
+        }
     }
 }
 
 article.container {
-    border-radius: 10px;
     background-color: rgba(44, 47, 52, 0.95);
     color: rgb(151, 151, 151);
     padding: 30px;
-    margin: 30px auto;
+    @media (min-width: @screen-md) {
+        margin: 30px auto;
+        border-radius: 10px;
+    }
 }
 
 .galleryList {
