@@ -1,8 +1,4 @@
-//
-
-var pagesController = angular.module('pagesController', []);
-
-pagesController.controller('pagesCtrl',
+angular.module('pagesController', []).controller('pagesCtrl',
     function ($scope, $rootScope, $sce, Page, $routeParams) {
 
         // Editor options.

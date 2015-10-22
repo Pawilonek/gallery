@@ -145,9 +145,6 @@ header {
                 color: rgb(255, 255, 255);
                 text-decoration: none;
             }
-            &:visited {
-                text-decoration: none;
-            }
         }
         .navbar-brand {
             color: rgb(188, 234, 22);
@@ -174,8 +171,6 @@ header {
 }
 
 footer {
-    //margin-top: 50px;
-
     overflow: hidden;
     background-color: rgb(25, 29, 25);
     color: rgb(120, 120, 120);
@@ -191,12 +186,14 @@ footer {
     .left {
         @media (max-width: @screen-sm-max) {
             text-align: center;
+            margin: 10px 0;
         }
     }
     .right {
         text-align: right;
         @media (max-width: @screen-sm-max) {
             text-align: center;
+            margin: 10px 0;
         }
     }
     span.icon {

@@ -131,9 +131,6 @@ header .navbar a:hover {
   color: #ffffff;
   text-decoration: none;
 }
-header .navbar a:visited {
-  text-decoration: none;
-}
 header .navbar .navbar-brand {
   color: #bcea16;
   font-size: 40px;
@@ -172,6 +169,7 @@ footer a:hover {
 @media (max-width: 767px) {
   footer .left {
     text-align: center;
+    margin: 10px 0;
   }
 }
 footer .right {
@@ -180,6 +178,7 @@ footer .right {
 @media (max-width: 767px) {
   footer .right {
     text-align: center;
+    margin: 10px 0;
   }
 }
 footer span.icon {

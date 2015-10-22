@@ -2,38 +2,7 @@ var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStora
     'galleriesController', 'galleriesService', 'authModalController', 'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap',
     'ckeditor', 'pagesController', 'pagesService']);
 
-galleryApp.config(function ($routeProvider) {
-    $routeProvider
-        .when('/page/:pageId/:pageSlug', {
-            templateUrl: 'partials/pages.html',
-            controller: 'pagesCtrl'
-        })
-        .when('/galleries', {
-            templateUrl: 'partials/gallery-list.html',
-            controller: 'galleriesCtrl'
-        })
-        .when('/galleries/:galleryId/:gallerySlug', {
-            templateUrl: 'partials/gallery.html',
-            controller: 'galleriesCtrl'
-        })
-        .when('/admin', {
-            templateUrl: 'partials/admin/index.html',
-            controller: 'adminCtrl'
-        })
-        .when('/admin/galleries/:galleryId', {
-            templateUrl: 'partials/admin/gallery.html',
-            controller: 'adminGalleryCtrl'
-        })
-        .otherwise({
-            redirectTo: '/page/1/home'
-        });
-});
-
-
-
-
-var apiUrl = 'http://api.gallery.local/';
-var userHash = null;
+galleryApp.config(routes);
 
 angular.module('galleryApp').controller('AlertCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
     $scope.alerts = [];
@@ -63,21 +32,25 @@ galleryApp.directive('fillWithImage', function () {
 });
 
 galleryApp.directive('focusMe', function ($timeout) {
-    return {
-        link: function (scope, element, attr) {
-            attr.$observe('focusMe', function (value) {
-                if (value === "true") {
-                    $timeout(function () {
-                        element[0].focus();
-                    });
-                }
-            });
-        }
+    return function (scope, element, attr) {
+        attr.$observe('focusMe', function (value) {
+            if (value === "true") {
+                $timeout(function () {
+                    element[0].focus();
+                });
+            }
+        });
     };
 });
 
 jQuery(document).ready(function ($) {
-    $('body').on('click', '.navbar-collapse a', function () {
+    var $body = $('body');
+    // Ukrywanie menu po przejściu na inną podstronę (widok mobilny)
+    $body.on('click', '.navbar-collapse a', function () {
         $(".navbar-collapse").collapse('hide');
+    });
+    // pozbycie się efektu :hover po kliknięciu na elementy menu
+    $body.on('mouseup', 'a', function () {
+        $(this).blur();
     });
 });

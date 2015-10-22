@@ -1,7 +1,7 @@
 var layoutsService = angular.module('layoutsService', ['ngResource']);
 layoutsService.factory('Layout', ['$resource',
     function ($resource) {
-        return $resource(apiUrl + 'layouts/:layoutId.json', {layoutId: ''}, {
+        return $resource(config.apiUrl + 'layouts/:layoutId.json', {layoutId: ''}, {
             'update': { method:'PUT' }
         });
     }]);
@@ -9,7 +9,7 @@ layoutsService.factory('Layout', ['$resource',
 var galleriesService = angular.module('galleriesService', ['ngResource']);
 galleriesService.factory('Gallery', ['$resource',
     function ($resource) {
-        var galleries = $resource(apiUrl + 'galleries/:id.json', {id: '@id' }, {
+        var galleries = $resource(config.apiUrl + 'galleries/:id.json', {id: '@id' }, {
             'update': { method:'PUT' }
         });
         galleries.prototype.save = function() {
@@ -25,7 +25,7 @@ galleriesService.factory('Gallery', ['$resource',
 var pagesService = angular.module('pagesService', ['ngResource']);
 pagesService.factory('Page', ['$resource',
     function ($resource) {
-        var pages = $resource(apiUrl + 'pages/:id.json', {id: '@id' }, {
+        var pages = $resource(config.apiUrl + 'pages/:id.json', {id: '@id' }, {
             'update': { method:'PUT' }
         });
         pages.prototype.save = function() {
@@ -41,7 +41,7 @@ pagesService.factory('Page', ['$resource',
 var filesService = angular.module('filesService', ['ngResource']);
 filesService.factory('File', ['$resource',
     function ($resource) {
-        return $resource(apiUrl + 'images/:fileId.json', {fileId: ''}, {
+        return $resource(config.apiUrl + 'images/:fileId.json', {fileId: ''}, {
             'update': { method:'PUT' }
         });
     }]);
