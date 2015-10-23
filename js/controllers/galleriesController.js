@@ -1,6 +1,4 @@
-var galleriesController = angular.module('galleriesController', []);
-
-galleriesController.controller('galleriesCtrl',
+angular.module('galleriesController', []).controller('galleriesCtrl',
     function ($scope, $routeParams, $sce, Gallery) {
 
         $scope.galleries = [];
