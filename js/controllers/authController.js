@@ -101,6 +101,13 @@ angular.module('authController', []).controller('authenticationsCtrl',
 ).factory('authInterceptor',
     function ($rootScope, $q) {
         return {
+            /**
+             * Funkcja odpowiedzialna, jeżeli użytkownik jest zalogowany, za dodanie
+             * do każdego zapytania nagłówka zawierającego uwierzytelniający token.
+             *
+             * @param config
+             * @return {*}
+             */
             'request': function (config) {
                 config.headers = config.headers || {};
                 if ($rootScope.authToken) {
@@ -108,6 +115,15 @@ angular.module('authController', []).controller('authenticationsCtrl',
                 }
                 return config;
             },
+            /**
+             * Funkcja odpowiedzialna za nasłuchowanie odpowiedzi nadesłanych przez
+             * serwer. Jeżeli odpowiedź zawierała kod 401 (Unauthorized) lub 403
+             * (Forbidden) wyświetla stosowny komunikat i/lub uruchamia okienko logowania.
+             *
+             * @todo napisać tą funkcję
+             * @param response
+             * @return {*}
+             */
             'responseError': function (response) {
                 /*
                  if (response.status === 401 || response.status === 403) {
