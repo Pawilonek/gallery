@@ -19,6 +19,10 @@
     <script src="/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
     <script src="/bower_components/ngstorage/ngStorage.min.js"></script>
     <script src="/bower_components/angular-ckeditor/angular-ckeditor.js"></script>
+    <!-- angular-gridster -->
+    <link rel="stylesheet" href="/bower_components/angular-gridster/dist/angular-gridster.min.css"/>
+    <script src="/bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+    <script src="/bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
@@ -43,24 +47,26 @@
 
     <link rel="stylesheet" href="css/style.css"/>
 </head>
-<body>
+<body data-ng-controller="loaderCtrl">
 
-<div id="wrapper">
+<div id="wrapper" data-ng-class="numOfRequests ? 'blur' : ''">
+    <div data-ng-include data-src="'partials/header.html'"></div>
 
-<div data-ng-include data-src="'partials/header.html'"></div>
+    <article class="container">
+        <div data-ng-controller="AlertCtrl">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                {{alert.msg}}
+            </alert>
+        </div>
+        <section data-ng-view></section>
+    </article>
 
-<article class="container">
-    <div data-ng-controller="AlertCtrl">
-        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
-    </div>
-
-    <section data-ng-view></section>
-</article>
-
-
-<footer data-ng-include data-src="'partials/footer.html'"></footer>
+    <footer data-ng-include data-src="'partials/footer.html'"></footer>
 </div>
 
+<div id="loader" data-ng-show="numOfRequests">
+    <img src="img/spinner.gif" alt="spinner"/>
+</div>
 
 </body>
 </html>

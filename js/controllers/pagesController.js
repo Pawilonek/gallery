@@ -25,7 +25,7 @@ angular.module('pagesController', []).controller('pagesCtrl',
             page.save();
         };
 
-        $scope.$watch('page.body', function(newValue, oldValue) {
+        $scope.$watch('page.body', function (newValue, oldValue) {
             $scope.contentSafe = $sce.trustAsHtml(newValue);
         });
 
@@ -40,4 +40,5 @@ angular.module('pagesController', []).controller('pagesCtrl',
             });
         };
 
-    });
+    }
+);

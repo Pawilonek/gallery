@@ -18,6 +18,7 @@
     "ngstorage": "0.3.*",
     "angular-ckeditor": "~1.0.0",
     "ckeditor": "~4.5.3",
-    "jwt-decode": "~1.4.0"
+    "jwt-decode": "~1.4.0",
+    "angular-gridster": "~0.13.5"
   }
 }

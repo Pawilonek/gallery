@@ -1,10 +1,25 @@
 <div data-ng-init="init()">
+    {{layouts}}
+    <div class="row">
+        <div data-gridster>
+            <ul>
+                <li data-gridster-item data-ng-repeat="layout in layouts" style=" background-color: khaki;"
+                    data-row="layout.position[0]" data-col="layout.position[1]"
+                    data-sizex="layout.size.x" data-sizey="layout.size.y" >
+                    <img data-ng-src="{{layout.image.absolute_url}}" alt="" style="max-height: 100%; max-width: 100%; height: auto; width: auto;" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <button data-ng-click="print()">test</button>
     <div class="col-md-7">
         <h2>{{gallery.name}}</h2>
+
         <div class="adminLayout">
             <div data-ng-repeat="layout in layouts">
                 <div class="image">
-                    <img data-ng-src="{{layout.image.absolute_url}}" alt="" />
+                    <img data-ng-src="{{layout.image.absolute_url}}" alt=""/>
+
                     <div class="imageSettings">
                         <button class="btn btn-danger" data-ng-click="deleteLayout(layout.id)">
                             <span class="glyphicon glyphicon-trash"></span>
@@ -16,10 +31,11 @@
     </div>
     <div class="col-md-5">
         <h2>Dostępne obrazy</h2>
+
         <div>
-            <div class="uploadedImages" data-ng-repeat="image in images" data-id="{{image.id}}" >
+            <div class="uploadedImages" data-ng-repeat="image in images" data-id="{{image.id}}">
                 <!-- {{image}} -->
-                <img data-ng-src="{{image.absolute_url}}" />
+                <img data-ng-src="{{image.absolute_url}}"/>
             </div>
         </div>
     </div>

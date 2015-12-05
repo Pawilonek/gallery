@@ -121,8 +121,15 @@ body {
 .container {
     padding: 0;
 }
+
 #wrapper {
     background-color: rgb(32, 36, 42);
+    &.blur {
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        pointer-events: none;
+        cursor: default;
+    }
 }
 
 header {
@@ -272,5 +279,20 @@ article.container {
             bottom: 5px;
         }
 
+    }
+}
+
+#loader {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
     }
 }

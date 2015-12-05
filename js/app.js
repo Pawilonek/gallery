@@ -1,6 +1,6 @@
 var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStorage', /*'layoutsController',*/ 'layoutsService', 'authController',
     'galleriesController', 'galleriesService', 'authModalController', 'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap',
-    'ckeditor', 'pagesController', 'pagesService']);
+    'ckeditor', 'pagesController', 'pagesService', 'gridster', 'loaderController']);
 
 galleryApp.config(routes);
 
