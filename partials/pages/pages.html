@@ -1,0 +1,32 @@
+<div data-ng-include data-src="'partials/partials/header.html'"></div>
+
+<article class="container">
+    <div data-ng-controller="AlertCtrl">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+            {{alert.msg}}
+        </alert>
+    </div>
+
+    <div data-ng-controller="pagesCtrl" data-ng-init="init()">
+        <div data-ng-hide="isAdmin()">
+            <div data-ng-bind-html="contentSafe"></div>
+            <p>
+                <small>
+                    Ostatnia modyfikacja:
+                    <time datetime="{{page.modified}}">
+                        {{ page.modified | date:'dd/MM/yyyy HH:mm' }}
+                    </time>
+                </small>
+            </p>
+        </div>
+        <div data-ng-show="isAdmin()">
+            <form data-ng-submit="savePage()">
+                <div data-ckeditor="options" data-ng-model="page.body" data-ready="onReady()"
+                     contenteditable="true"></div>
+                <button class="btn btn-default">zapisz</button>
+            </form>
+        </div>
+    </div>
+</article>
+
+<footer data-ng-include data-src="'partials/partials/footer.html'"></footer>

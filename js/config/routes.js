@@ -1,26 +1,29 @@
 function routes($routeProvider) {
     $routeProvider
+        .when('/', {
+            templateUrl: 'partials/pages/home.html',
+        })
         .when('/page/:pageId/:pageSlug', {
-            templateUrl: 'partials/pages.html',
+            templateUrl: 'partials/pages/pages.html',
             controller: 'pagesCtrl'
         })
         .when('/galleries', {
-            templateUrl: 'partials/gallery-list.html',
+            templateUrl: 'partials/pages/gallery-list.html',
             controller: 'galleriesCtrl'
         })
         .when('/galleries/:galleryId/:gallerySlug', {
-            templateUrl: 'partials/gallery.html',
+            templateUrl: 'partials/pages/gallery.html',
             controller: 'galleriesCtrl'
         })
         .when('/admin', {
-            templateUrl: 'partials/admin/index.html',
+            templateUrl: 'partials/pages/admin/index.html',
             controller: 'adminCtrl'
         })
         .when('/admin/galleries/:galleryId', {
-            templateUrl: 'partials/admin/gallery.html',
+            templateUrl: 'partials/pages/admin/gallery.html',
             controller: 'adminGalleryCtrl'
         })
         .otherwise({
-            redirectTo: '/page/1/home'
+            redirectTo: '/'
         });
 }

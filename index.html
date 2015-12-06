@@ -50,18 +50,16 @@
 <body data-ng-controller="loaderCtrl">
 
 <div id="wrapper" data-ng-class="numOfRequests ? 'blur' : ''">
-    <div data-ng-include data-src="'partials/header.html'"></div>
 
-    <article class="container">
-        <div data-ng-controller="AlertCtrl">
-            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-                {{alert.msg}}
-            </alert>
-        </div>
-        <section data-ng-view></section>
-    </article>
+    <!--<article class="container">-->
+        <!--<div data-ng-controller="AlertCtrl">-->
+            <!--<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">-->
+                <!--{{alert.msg}}-->
+            <!--</alert>-->
+        <!--</div>-->
+    <!--</article>-->
 
-    <footer data-ng-include data-src="'partials/footer.html'"></footer>
+    <div data-ng-view></div>
 </div>
 
 <div id="loader" data-ng-show="numOfRequests">

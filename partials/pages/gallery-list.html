@@ -1,0 +1,16 @@
+<div data-ng-include data-src="'partials/partials/header.html'"></div>
+
+<article class="container">
+    <div class="galleryList" data-ng-init="loadGalleries()">
+        <div class="singleGallery" data-ng-repeat="g in galleries">
+            <a data-ng-href="/#/galleries/{{g.id}}/{{g.slug}}">
+                <div class="galleryImage" data-fill-with-image="{{g.layouts[0].image.absolute_url}}"></div>
+                <div class="galleryHover">
+                    <div class="galleryName" data-ng-bind="g.name"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</article>
+
+<footer data-ng-include data-src="'partials/partials/footer.html'"></footer>

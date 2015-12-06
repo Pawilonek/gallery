@@ -9,6 +9,16 @@ angular.module('pagesController', []).controller('pagesCtrl',
         };
 
         $scope.page = null;
+        $scope.pages = [];
+
+        $scope.loadPages = function () {
+            Page.get(function (response) {
+                $scope.pages = response.pages;
+            }, function (response) {
+                // TODO: error
+                console.log(response);
+            })
+        };
 
         $scope.init = function () {
             $scope.loadPage();
