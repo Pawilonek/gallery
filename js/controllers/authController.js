@@ -78,7 +78,7 @@ angular.module('authController', []).controller('authenticationsCtrl',
             // generuj nowe okienko z obsługą logowania
             var modalInstance = $modal.open({
                 animation: true,
-                templateUrl: 'partials/modals/loginModal.html',
+                templateUrl: 'html/modals/loginModal.html',
                 controller: 'authModalCtrl'
             });
             //

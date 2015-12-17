@@ -11,25 +11,35 @@ angular.module('newGalleryModalController', []).controller('newGalleryModalCtrl'
         // obiekt zawieracjący nazwę galerii
         $scope.galleryName = '';
         /**
-         *
+         * Funkcja odpowiedzialna za stworzenie nowej galerii.
          */
         $scope.newGallery = function () {
+            // Sprawdzenie czy użytkownik podał jakąkolwiek nazwę
             if (!$scope.galleryName) {
                 $scope.errorMessage = "Podaj nazwę galerii.";
                 return;
             }
-
+            // uruchomienie kręciołka
             $scope.buttonValue = $scope.spinner;
-
+            // stworzenie nowej galerii
             var gallery = new Gallery();
             gallery.name = $scope.galleryName;
+            // zapisanie nowej galerii
             gallery.$save(function (response) {
+                // zamknięcie okienka
+                $modalInstance.close();
+                // przekierowanie na podstronę nowej galerii
                 var url = "/galleries/" + response.gallery.id + "/" + response.gallery.slug;
                 $location.path(url);
-                $scope.buttonValue = $scope.defaultButtonValue;
-                $modalInstance.close();
             }, function (response) {
-                console.log(response);
+                if (response.status == 400) {
+                    // błędna nazwa galerii
+                    $scope.errorMessage = "Galeria o podanej nazwie (lub bardzo podobnej) już istnieje.";
+                } else {
+                    // nieznany błąd
+                    $scope.errorMessage = "Wystąpił błąd.";
+                }
+                // przywrócenie poprzedniego napisu na przycisku
                 $scope.buttonValue = $scope.defaultButtonValue;
             });
         };
@@ -41,4 +51,5 @@ angular.module('newGalleryModalController', []).controller('newGalleryModalCtrl'
         $scope.dismissModal = function () {
             $modalInstance.dismiss('cancel');
         };
-    });
+    }
+);

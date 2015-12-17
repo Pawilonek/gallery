@@ -1,0 +1,19 @@
+<div data-ng-include data-src="'html/partials/header.html'"></div>
+
+<article class="container">
+    <div data-ng-init="loadGallery()">
+
+        <h1 class="center">{{gallery.name}}</h1>
+
+        <div>
+
+            <div class="image" data-ng-repeat="layout in gallery.layouts">
+                <img data-ng-src="{{layout.image.absolute_url}}" alt=""/>
+            </div>
+
+        </div>
+
+    </div>
+</article>
+
+<footer data-ng-include data-src="'html/partials/footer.html'"></footer>

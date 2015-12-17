@@ -9,37 +9,16 @@ angular.module('galleriesController', []).controller('galleriesCtrl',
         $scope.spinner = $sce.trustAsHtml('<i class="fa fa-spin fa-spinner"></i>');
         $scope.buttonValue = $scope.defaultButtonValue;
 
-        $scope.newGallery = '';
+        /**
+         * Funkcja odpowiedzilna za dodanie nowej galerii
+         */
         $scope.addGallery = function () {
-
-            var modalInstance = $modal.open({
+            // otwarcie okienka odpowiedzilnego za dodanie nowej galerii
+            $modal.open({
                 animation: true,
-                templateUrl: 'partials/modals/newGalleryModal.html',
+                templateUrl: 'html/modals/newGalleryModal.html',
                 controller: 'newGalleryModalCtrl'
             });
-            //
-            modalInstance.result.then(function () {
-                // logowanie się powiodło
-                //$scope.login($rootScope.authToken);
-            }, function () {
-                // okienko zostało zamknięte
-            });
-
-            /*
-            $scope.buttonValue = $scope.spinner;
-            if (!$scope.newGallery) {
-                return false;
-            }
-            var gallery = new Gallery();
-            gallery.name = $scope.newGallery;
-            $scope.newGallery = '';
-            gallery.$save(function () {
-                $scope.buttonValue = $scope.defaultButtonValue;
-                $scope.loadGalleries();
-            }, function () {
-                $scope.buttonValue = $scope.defaultButtonValue;
-            });
-            */
         };
 
         $scope.loadGalleries = function () {
