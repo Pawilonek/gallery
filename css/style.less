@@ -233,7 +233,7 @@ article.container {
         display: inline-block;
         overflow: hidden;
         position: relative;
-        border: solid rgb(93, 186, 12) 2px;
+        border: solid rgb(188, 234, 22) 2px;
         .galleryHover {
             position: absolute;
             left: 0;
@@ -277,6 +277,23 @@ article.container {
         }
         &:hover .galleryName {
             bottom: 5px;
+        }
+        &.addGallery {
+            position: relative;
+            line-height: 250px;
+            color: rgb(188, 234, 22);
+            font-size: 100px;
+            cursor: pointer;
+            background-color: #292D2E;
+            -webkit-box-shadow: inset 0 0 5px 1px rgb(188, 234, 22);
+            -moz-box-shadow: inset 0 0 5px rgb(188, 234, 22);
+            box-shadow: inset 0 0 5px 3px rgb(188, 234, 22);
+            i {
+               transition: all .1s ease-out;
+            }
+            &:hover i {
+                transform: scale(1.5);
+            }
         }
 
     }

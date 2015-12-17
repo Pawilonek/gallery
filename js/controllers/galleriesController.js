@@ -1,5 +1,5 @@
 angular.module('galleriesController', []).controller('galleriesCtrl',
-    function ($scope, $routeParams, $sce, Gallery) {
+    function ($scope, $routeParams, $sce, Gallery, $modal) {
 
         $scope.galleries = [];
         $scope.gallery = {};
@@ -11,6 +11,21 @@ angular.module('galleriesController', []).controller('galleriesCtrl',
 
         $scope.newGallery = '';
         $scope.addGallery = function () {
+
+            var modalInstance = $modal.open({
+                animation: true,
+                templateUrl: 'partials/modals/newGalleryModal.html',
+                controller: 'newGalleryModalCtrl'
+            });
+            //
+            modalInstance.result.then(function () {
+                // logowanie się powiodło
+                //$scope.login($rootScope.authToken);
+            }, function () {
+                // okienko zostało zamknięte
+            });
+
+            /*
             $scope.buttonValue = $scope.spinner;
             if (!$scope.newGallery) {
                 return false;
@@ -24,6 +39,7 @@ angular.module('galleriesController', []).controller('galleriesCtrl',
             }, function () {
                 $scope.buttonValue = $scope.defaultButtonValue;
             });
+            */
         };
 
         $scope.loadGalleries = function () {
