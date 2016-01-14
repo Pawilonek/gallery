@@ -159,7 +159,7 @@ angular.module('galleriesController', []).controller('galleriesCtrl',
 
         $scope.deleteLayout = function (id) {
             Layout.delete({id: id}, function () {
-                $scope.loadLayouts();
+                $scope.loadGallery();
             });
         };
 
