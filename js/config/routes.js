@@ -1,7 +1,7 @@
 function routes($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'html/pages/home.html',
+            templateUrl: 'html/pages/home.html'
         })
         .when('/page/:pageId/:pageSlug', {
             templateUrl: 'html/pages/pages.html',

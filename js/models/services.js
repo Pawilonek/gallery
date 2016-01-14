@@ -1,34 +1,42 @@
-var layoutsService = angular.module('layoutsService', ['ngResource']);
-layoutsService.factory('Layout', ['$resource',
+angular.module('layoutsService', ['ngResource']).factory('Layout', ['$resource',
     function ($resource) {
-        return $resource(config.apiUrl + 'layouts/:layoutId.json', {layoutId: ''}, {
-            'update': { method:'PUT' }
+        var layouts = $resource(config.apiUrl + 'layouts/:id.json', {id: '@id'}, {
+            'update': {method: 'PUT'}
         });
-    }]);
-
-var galleriesService = angular.module('galleriesService', ['ngResource']);
-galleriesService.factory('Gallery', ['$resource',
-    function ($resource) {
-        var galleries = $resource(config.apiUrl + 'galleries/:id.json', {id: '@id' }, {
-            'update': { method:'PUT' }
-        });
-        galleries.prototype.save = function() {
+        layouts.prototype.save = function (response, errorResponse) {
             if (this.id) {
-                return this.$update();
+                return this.$update(response, errorResponse);
             } else {
-                return this.$save();
+                return this.$save(response, errorResponse);
+            }
+        };
+        return layouts;
+    }
+]);
+
+angular.module('galleriesService', ['ngResource']).factory('Gallery', ['$resource',
+    function ($resource) {
+        var galleries = $resource(config.apiUrl + 'galleries/:id.json', {id: '@id'}, {
+            'update': {method: 'PUT'}
+        });
+        galleries.prototype.save = function (response, errorResponse) {
+            if (this.id) {
+                return this.$update(response, errorResponse);
+            } else {
+                return this.$save(response, errorResponse);
             }
         };
         return galleries;
-    }]);
+    }
+]);
 
 var pagesService = angular.module('pagesService', ['ngResource']);
 pagesService.factory('Page', ['$resource',
     function ($resource) {
-        var pages = $resource(config.apiUrl + 'pages/:id.json', {id: '@id' }, {
-            'update': { method:'PUT' }
+        var pages = $resource(config.apiUrl + 'pages/:id.json', {id: '@id'}, {
+            'update': {method: 'PUT'}
         });
-        pages.prototype.save = function() {
+        pages.prototype.save = function () {
             if (this.id) {
                 return this.$update();
             } else {
@@ -36,12 +44,13 @@ pagesService.factory('Page', ['$resource',
             }
         };
         return pages;
-    }]);
+    }
+]);
 
 var filesService = angular.module('filesService', ['ngResource']);
 filesService.factory('File', ['$resource',
     function ($resource) {
         return $resource(config.apiUrl + 'images/:fileId.json', {fileId: ''}, {
-            'update': { method:'PUT' }
+            'update': {method: 'PUT'}
         });
     }]);

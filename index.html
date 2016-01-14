@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no"/>
-    <title> Gallery </title>
+    <title> Jacek Hazuka </title>
 
     <!-- jQuery -->
     <script src="/bower_components/jQuery/dist/jquery.min.js"></script>
@@ -49,17 +49,8 @@
 </head>
 <body data-ng-controller="loaderCtrl">
 
-<div id="wrapper" data-ng-class="numOfRequests ? 'blur' : ''">
+<div id="wrapper" data-ng-class="numOfRequests ? 'blur' : ''" data-ng-view>
 
-    <!--<article class="container">-->
-        <!--<div data-ng-controller="AlertCtrl">-->
-            <!--<alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">-->
-                <!--{{alert.msg}}-->
-            <!--</alert>-->
-        <!--</div>-->
-    <!--</article>-->
-
-    <div data-ng-view></div>
 </div>
 
 <div id="loader" data-ng-show="numOfRequests">

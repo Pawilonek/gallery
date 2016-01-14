@@ -1,7 +1,8 @@
 var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStorage', /*'layoutsController',*/ 'layoutsService', 'authController',
     'galleriesController', 'galleriesService', 'authModalController', 'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap',
-    'ckeditor', 'pagesController', 'pagesService', 'gridster', 'loaderController', 'newGalleryModalController']);
+    'ckeditor', 'pagesController', 'pagesService', 'gridster', 'loaderController', 'newGalleryModalController', 'changeGalleryModalController']);
 
+// ustawienie reguł routingu (/js/config/routes.js)
 galleryApp.config(routes);
 
 angular.module('galleryApp').controller('AlertCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
@@ -43,6 +44,7 @@ galleryApp.directive('focusMe', function ($timeout) {
     };
 });
 
+// skrypty jQuery lekko zmieniające działanie niektórych elementów
 jQuery(document).ready(function ($) {
     var $body = $('body');
     // Ukrywanie menu po przejściu na inną podstronę (widok mobilny)

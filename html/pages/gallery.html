@@ -1,19 +1,49 @@
 <div data-ng-include data-src="'html/partials/header.html'"></div>
 
-<article class="container">
-    <div data-ng-init="loadGallery()">
+<article class="container" id="gallery" data-ng-init="loadGallery()">
 
-        <h1 class="center">{{gallery.name}}</h1>
-
-        <div>
-
-            <div class="image" data-ng-repeat="layout in gallery.layouts">
-                <img data-ng-src="{{layout.image.absolute_url}}" alt=""/>
-            </div>
-
-        </div>
-
+    <div class="row">
+        <h1 class="center">
+            {{gallery.name}}
+            <a href="" data-ng-show="isAdmin()" data-ng-click="editGallery(gallery)"><i class="fa fa-fw fa-pencil"></i></a>
+            <a href="" data-ng-show="isAdmin()" data-ng-click="deleteGallery(gallery)"><i class="fa fa-fw fa-trash"></i></a>
+        </h1>
     </div>
+
+    <div class="row">
+        <div data-gridster="isAdmin() ? gridsterOptsAdmin : gridsterOpts">
+            <ul>
+                <li data-gridster-item data-ng-repeat="layout in gallery.layouts"
+                    data-ng-class="isAdmin() ? 'admin' : ''"
+                    data-row="layout.position_y" data-col="layout.position_x"
+                    data-sizex="layout.size_w" data-sizey="layout.size_h"
+                    data-layoutid="{{layout.id}}">
+                    <img data-ng-src="{{layout.image.absolute_url}}" alt=""
+                         style="max-height: 100%; max-width: 100%; height: auto; width: auto;"/>
+
+                    <div class="imageSettings" data-ng-show="isAdmin()">
+                        <button class="btn btn-danger" data-ng-click="deleteLayout(layout.id)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row" data-ng-show="isAdmin()">
+        <h2>Dostępne obrazy</h2>
+    </div>
+    <div class="row availableImages" data-ng-show="isAdmin()" data-ng-init="init()">
+        <div
+                class="uploadedImage"
+                data-ng-repeat="image in images"
+                data-id="{{image.id}}"
+                data-ng-click="addImage(image.id)">
+            <img data-ng-src="{{image.absolute_url}}"/>
+        </div>
+    </div>
+
 </article>
 
 <footer data-ng-include data-src="'html/partials/footer.html'"></footer>
