@@ -11,15 +11,24 @@
                     </button>
                     <a data-ng-href="/#/" class="navbar-brand">Jacek Hazuka</a>
                 </div>
-                <div id="menu" class="collapse navbar-collapse" data-ng-controller="authenticationsCtrl"
-                     data-ng-init="init()">
+                <div id="menu" class="collapse navbar-collapse" data-ng-controller="authenticationsCtrl" data-ng-init="init()">
                     <ul class="nav navbar-nav navbar-right" data-ng-controller="pagesCtrl" data-ng-init="loadPages()">
                         <li><a data-ng-href="/#/" class="btn"><i class="fa fa-home"></i></a></li>
                         <li><a data-ng-href="/#/galleries" class="btn">galerie</a></li>
-                        <li data-ng-repeat="page in pages">
+                        <li data-ng-repeat="page in pages" class="hidden-md hidden-sm">
                             <a data-ng-href="/#/page/{{page.id}}/{{page.slug}}" class="btn">{{page.title}}</a>
                         </li>
-                        <li><a data-ng-href="/#/admin" class="btn" data-ng-show="isAdmin()">admin</a></li>
+                        <li class="dropdown visible-md-block visible-sm-block">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                podstrony <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-inverse">
+                                <li data-ng-repeat="page in pages">
+                                    <a data-ng-href="/#/page/{{page.id}}/{{page.slug}}" class="btn">{{page.title}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a data-ng-href="/#/admin" class="btn" data-ng-show="isAdmin()">magazyn</a></li>
                         <li><a data-ng-click="openModal()" class="btn" data-ng-hide="isLoggedIn()">zaloguj</a></li>
                         <li><a data-ng-click="logout()" class="btn" data-ng-show="isLoggedIn()">wyloguj</a></li>
                     </ul>

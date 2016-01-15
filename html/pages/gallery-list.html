@@ -5,7 +5,7 @@
         <div class="singleGallery addGallery" data-ng-show="isAdmin()" data-ng-click="addGallery()">
             <i class="fa fa-plus"></i>
         </div>
-        <div class="singleGallery" data-ng-repeat="g in galleries">
+        <div class="singleGallery" data-ng-repeat="g in galleries" data-ng-show="g.layouts.length || isAdmin()">
             <a data-ng-href="/#/galleries/{{g.id}}/{{g.slug}}">
                 <div class="galleryImage" data-fill-with-image="{{g.layouts[0].image.absolute_url}}"></div>
                 <div class="galleryHover">
