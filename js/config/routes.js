@@ -15,13 +15,9 @@ function routes($routeProvider) {
             templateUrl: 'html/pages/gallery.html',
             controller: 'galleriesCtrl'
         })
-        .when('/admin', {
-            templateUrl: 'html/pages/admin/index.html',
-            controller: 'adminCtrl'
-        })
-        .when('/admin/galleries/:galleryId', {
-            templateUrl: 'html/pages/admin/gallery.html',
-            controller: 'adminGalleryCtrl'
+        .when('/depot', {
+            templateUrl: 'html/pages/depot.html',
+            controller: 'depotCtrl'
         })
         .otherwise({
             redirectTo: '/'

@@ -1,5 +1,5 @@
-var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStorage', /*'layoutsController',*/ 'layoutsService', 'authController',
-    'galleriesController', 'galleriesService', 'authModalController', 'adminController', 'angularFileUpload', 'filesService', 'ui.bootstrap',
+var galleryApp = angular.module('galleryApp', ['ngRoute', 'ngResource', 'ngStorage', 'layoutsService', 'authController',
+    'galleriesController', 'galleriesService', 'authModalController', 'depotController', 'angularFileUpload', 'filesService', 'ui.bootstrap',
     'ckeditor', 'pagesController', 'pagesService', 'gridster', 'loaderController', 'newGalleryModalController', 'changeGalleryModalController']);
 
 // ustawienie reguł routingu (/js/config/routes.js)

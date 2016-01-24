@@ -21,6 +21,12 @@
                     <img data-ng-src="{{layout.image.absolute_url}}" alt=""
                          style="max-height: 100%; max-width: 100%; height: auto; width: auto;"/>
 
+                    <div class="imageInfo">
+                        <p data-ng-repeat="info in layout.image.info">
+                            <strong>{{info.key}}:</strong>
+                            {{info.value}}
+                        </p>
+                    </div>
                     <div class="imageSettings" data-ng-show="isAdmin()">
                         <button class="btn btn-danger" data-ng-click="deleteLayout(layout.id)">
                             <span class="glyphicon glyphicon-trash"></span>

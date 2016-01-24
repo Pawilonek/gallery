@@ -75,9 +75,14 @@ angular.module('galleriesController', []).controller('galleriesCtrl',
 
         $scope.loadGallery = function () {
             Gallery.get({id: $routeParams.galleryId}, function (response) {
+                // dekodowanie informacji o obrazie zapisane w JSONie
+                for(var i=0; i < response.gallery.layouts.length; i++) {
+                    response.gallery.layouts[i].image.info = angular.fromJson(response.gallery.layouts[i].image.info);
+                }
+                // zapisanie odpowiedzi
                 $scope.gallery = response.gallery;
             }, function (response) {
-                // TODO: error
+                // TODO: obsługa błędu
                 console.log(response);
             });
         };

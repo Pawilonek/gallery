@@ -1,0 +1,61 @@
+<div data-ng-include data-src="'html/partials/header.html'"></div>
+
+<article class="container" data-ng-init="init()">
+    <div class="row">
+        <h3>dostępne obrazy</h3>
+    </div>
+    <div class="row availableImages">
+        <div
+                class="uploadedImage"
+                data-ng-repeat="image in images"
+                data-id="{{image.id}}"
+                data-ng-click="addImage(image.id)">
+            <img data-ng-src="{{image.absolute_url}}"/>
+        </div>
+    </div>
+    <div id="uploader" class="row" data-uploader="uploader" data-filters="queueLimit, customFilter">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>dodaj zdjęcia</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="well dropZone" data-nv-file-drop="" data-uploader="uploader">
+                    <p>przeciągnij plik tutaj</p>
+
+                    <p>lub</p>
+                    <label for="imagesInput" class="btn btn-default">wybierz plik</label>
+                    <input id="imagesInput"
+                           data-nv-file-select=""
+                           type="file"
+                           data-uploader="uploader"
+                           multiple
+                           accept="image/*"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div data-ng-repeat="item in uploader.queue">
+                    <div data-ng-hide="item.src">
+                        <strong>{{ item.file.name}}</strong>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar"
+                                         data-ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                {{item.progress}}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<footer data-ng-include data-src="'html/partials/footer.html'"></footer>

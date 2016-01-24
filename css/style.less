@@ -211,17 +211,38 @@ article.container {
 }
 
 #gallery {
-    .imageSettings {
-        z-index: 5;
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        padding: 5px;
-    }
     li {
         text-align: center;
         &.admin {
             background-color: rgb(90, 90, 80);
+        }
+        .imageInfo {
+            z-index: 5;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            text-align: left;
+            background-color: rgb(210, 200, 150);
+            border: 1px #5e4736 solid;
+            padding: 5px;
+            color: rgb(0, 0, 0);
+            opacity: 0.1;
+            transition: opacity 0.5s;
+            p {
+                margin: 0;
+            }
+        }
+        &:hover {
+            .imageInfo {
+                opacity: 1;
+            }
+        }
+        .imageSettings {
+            z-index: 5;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px;
         }
     }
     .availableImages {
@@ -270,5 +291,49 @@ article.container {
     }
     & > .divider {
         background-color: #000;
+    }
+}
+
+#uploader {
+    .dropZone {
+        border: dotted 2px lightgray;
+        text-align: center;
+    }
+    #imagesInput {
+        display: none;
+    }
+}
+
+
+.availableImages {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 1px 1px 1px 0;
+    text-align: center;
+    border: rgb(210, 200, 150) 1px solid;
+    white-space: nowrap;
+    .uploadedImage {
+        width: 150px;
+        height: 150px;
+        margin: 1px;
+        display: inline-block;
+        background-color: rgb(210, 200, 150);
+        position: relative;
+        cursor: pointer;
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            height: auto;
+            width: auto;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+        &:hover img {
+            opacity: 0.7;
+        }
     }
 }
